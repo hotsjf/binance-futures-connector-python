@@ -36,6 +36,17 @@ class UMFuturesWebsocketClient(BinanceWebsocketClient):
             "{}@markPrice@{}s".format(symbol.lower(), speed), id, callback, **kwargs
         )
 
+    def mark_price_arr(self, id: int, speed: int, callback, **kwargs):
+        """Mark Price Streams
+        Mark price and funding rate for all symbols pushed every 3 seconds or every second.
+        Stream Name: markPrice@Arr or markPrice@Arr@1s
+        https://binance-docs.github.io/apidocs/futures/en/#mark-price-stream
+        Update Speed: 3000ms or 1000ms
+        """
+        self.live_subscribe(
+            "markPrice@arr@{}s".format(speed), id, callback, **kwargs
+        )
+
     def kline(self, symbol: str, id: int, interval: str, callback, **kwargs):
         """Kline/Candlestick Streams
 
